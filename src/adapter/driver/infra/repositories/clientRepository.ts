@@ -14,13 +14,13 @@ class ClientRepository implements IClientRepository{
         }
     }
 
-    async findBy(key: string, value: string): Promise<boolean> {
+    async findBy(key: string, value: string): Promise<Client[] | []> {
         try {
             const clientRepository = dataSource.getDataSource().getRepository(Client)
             return await clientRepository.findBy( { key: value } )    
         } catch (error) {
             console.log(error)
-            return false
+            return []
         }
     }
 }

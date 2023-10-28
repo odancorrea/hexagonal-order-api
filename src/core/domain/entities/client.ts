@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Order } from "./order"
 
 @Entity()
 export class Client {
@@ -13,6 +14,9 @@ export class Client {
 
     @Column()
     cpf: string
+
+    @OneToMany(() => Order, (order: { client: any }) => order.client)
+    orders?: Order[]
 
     constructor (name: string, email: string, cpf: string) {
         this.name = name

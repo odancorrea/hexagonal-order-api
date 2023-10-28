@@ -4,6 +4,7 @@ import express from "express"
 import application from "../controller/applicationController";
 import clientController from "../controller/clientController";
 import productController from "../controller/productController";
+import orderController from "../controller/orderController";
 
 class Server implements iDrivenAdapter{
     app: Express
@@ -24,12 +25,14 @@ class Server implements iDrivenAdapter{
 
     setRoutes() {
         this.app.get('/ping', application.ping)
-        this.app.post('/client/create', clientController.create)
+        this.app.post('/client/', clientController.create)
         this.app.post('/client/identify', clientController.identify)
-        this.app.post('/product/create', productController.create)
-        this.app.put('/product/update/{id}', productController.update)
-        this.app.delete('/product/delete/{id}', productController.delete)
+        this.app.post('/product/', productController.create)
+        this.app.put('/product/{id}', productController.update)
+        this.app.delete('/product/{id}', productController.delete)
         this.app.get('/product/findByCategory/{category}', productController.findByCategory)
+        this.app.get('/orders/', orderController.find)
+        this.app.post('/orders/checkout', orderController.checkout)
     }
 
     async start(): Promise<void> {

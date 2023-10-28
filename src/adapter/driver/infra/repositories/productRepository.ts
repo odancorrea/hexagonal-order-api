@@ -36,23 +36,23 @@ class ProductRepository implements IProductRepository{
         }
     }
 
-    async find(id: number): Promise<boolean> {
+    async find(id: number): Promise<Product | []> {
         try {
             const productRepository = dataSource.getDataSource().getRepository(Product)
             return await productRepository.findBy( { id: id } )    
         } catch (error) {
             console.log(error)
-            return false
+            return []
         }
     }
 
-    async findBy(key: string, value: string): Promise<boolean> {
+    async findBy(key: string, value: string): Promise<Product[] | []> {
         try {
             const productRepository = dataSource.getDataSource().getRepository(Product)
             return await productRepository.findBy( { key: value } )    
         } catch (error) {
             console.log(error)
-            return false
+            return []
         }
     }
 }

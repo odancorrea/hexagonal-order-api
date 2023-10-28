@@ -33,9 +33,9 @@ class ProductUseCases implements iProductUseCases {
         return false
     }
 
-    async findByCategory(category: string): Promise<boolean> {
-        let product = this.productRepository.findBy('category', category)
-        return !!product
+    async findByCategory(category: string): Promise<Product[] | []> {
+        let products = this.productRepository.findBy('category', category)
+        return products
     }
 }
 
