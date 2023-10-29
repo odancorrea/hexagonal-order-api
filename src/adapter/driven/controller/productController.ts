@@ -28,7 +28,7 @@ class ProductController {
         const productRepository = new ProductRepository()
         const productUseCase = new ProductUseCases(productRepository)
         const result = await productUseCase.findByCategory(req.params.category)
-        result ? res.status(200).send('ok') : res.status(404).send('not found')
+        result ? res.status(200).send(result) : res.status(404).send('not found')
     }
 }
 

@@ -18,17 +18,13 @@ export class Product {
     @Column()
     category: string
 
-    @Column()
-    images: string[]
-
     @ManyToMany(() => Order, (order: { products: any }) => order.products)
     orders?: Order[]
 
-    constructor (name: string, description: string, price: number, category: string, images: string[]) {
+    constructor (name: string, description: string, price: number, category: string) {
         this.name = name
         this.description = description
         this.price = price
         this.category = category
-        this.images = images
     }
 }

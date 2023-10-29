@@ -6,7 +6,7 @@ class ProductUseCases implements iProductUseCases {
     constructor (private productRepository: IProductRepository) {}
 
     async create(productInfo: any): Promise<boolean> {
-        const product = new Product(productInfo.name, productInfo.description, productInfo.price)
+        const product = new Product(productInfo.name, productInfo.description, productInfo.price, productInfo.category)
         await this.productRepository.create(product)
         
         return true

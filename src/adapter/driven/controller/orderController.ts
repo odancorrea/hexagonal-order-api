@@ -7,7 +7,7 @@ class OrderController {
         const orderRepository = new OrderRepository()
         const orderUseCase = new OrderUseCases(orderRepository)
         const result = await orderUseCase.find()
-        result ? res.status(200).send('ok') : res.status(404).send('not found')
+        result ? res.status(200).send(result) : res.status(404).send('not found')
     }
 
     async checkout(req: Request, res: Response) {

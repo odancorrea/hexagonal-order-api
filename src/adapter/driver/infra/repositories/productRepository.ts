@@ -46,10 +46,12 @@ class ProductRepository implements IProductRepository{
         }
     }
 
-    async findBy(key: string, value: string): Promise<Product[] | []> {
+    async findBy(field: string, value: string): Promise<Product[] | []> {
+        const query: any = {}
+        query[field] = value
         try {
             const productRepository = dataSource.getDataSource().getRepository(Product)
-            return await productRepository.findBy( { key: value } )    
+            return await productRepository.findBy(query)
         } catch (error) {
             console.log(error)
             return []
