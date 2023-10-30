@@ -10,7 +10,7 @@ class PgDataSource implements iDrivenAdapter {
     constructor() {
         this.appDataSource = new DataSource({
             type: "postgres",
-            host: "localhost",
+            host: "db",
             port: 5432,
             username: "root",
             password: "strong-password",

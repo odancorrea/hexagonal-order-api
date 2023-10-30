@@ -1,11 +1,26 @@
 version: "3.8"
 services:
+  api:
+    container_name: lanchonete-api
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - mynetwork
+    depends_on:
+      - db
+    environment:
+      - PORT=8000
   db:
     image: postgres
     container_name: postgres
     restart: always
     ports:
       - "5432:5432"
+    networks:
+      - mynetwork
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: strong-password
@@ -26,3 +41,7 @@ services:
 volumes:
   local_pgdata:
   pgadmin-data:
+
+networks:
+  mynetwork:
+    driver: bridge
