@@ -13,10 +13,9 @@ class ProductUseCases implements iProductUseCases {
     }
 
     async update(id: number, productInfo: any): Promise<boolean> {
-        let product = this.productRepository.find(id)
+        let product = await this.productRepository.find(id)
         if (product) {
-            product = { ...productInfo }
-            await this.productRepository.update(product)
+            await this.productRepository.update(Object.assign(product, productInfo))
             return true
         }
 
@@ -24,7 +23,7 @@ class ProductUseCases implements iProductUseCases {
     }
 
     async delete(id: number): Promise<boolean> {
-        let product = this.productRepository.find(id)
+        let product = await this.productRepository.find(id)
         if (product) {
             await this.productRepository.delete(product)
             return true
@@ -34,7 +33,7 @@ class ProductUseCases implements iProductUseCases {
     }
 
     async findByCategory(category: string): Promise<Product[] | []> {
-        let products = this.productRepository.findBy('category', category)
+        let products = await this.productRepository.findBy('category', category)
         return products
     }
 }

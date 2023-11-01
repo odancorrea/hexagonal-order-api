@@ -4,14 +4,9 @@ import dataSource from "../dataSource";
 
 class ProductRepository implements IProductRepository{
     async create(product: any): Promise<boolean> {
-        try {
-            const productRepository = dataSource.getDataSource().getRepository(Product)
-            await productRepository.save(product)
-            return true    
-        } catch (error) {
-            console.log(error)
-            return false
-        }
+        const productRepository = dataSource.getDataSource().getRepository(Product)
+        await productRepository.save(product)
+        return true
     }
 
     async update(product: any): Promise<boolean> {
@@ -36,13 +31,13 @@ class ProductRepository implements IProductRepository{
         }
     }
 
-    async find(id: number): Promise<Product | []> {
+    async find(id: number): Promise<Product | false> {
         try {
             const productRepository = dataSource.getDataSource().getRepository(Product)
-            return await productRepository.findBy( { id: id } )    
+            return await productRepository.findOneBy( { id: id } )    
         } catch (error) {
             console.log(error)
-            return []
+            return false
         }
     }
 

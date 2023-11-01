@@ -6,7 +6,7 @@ class OrderUseCases implements iOrderUseCases {
     constructor (private orderRepository: IOrderRepository) {}
     
     async find(): Promise<Order[] | []> {
-        let orders = this.orderRepository.find()
+        let orders = await this.orderRepository.find()
         return orders
     }
 

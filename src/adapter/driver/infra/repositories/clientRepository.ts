@@ -16,8 +16,11 @@ class ClientRepository implements IClientRepository{
 
     async findBy(key: string, value: string): Promise<Client[] | []> {
         try {
+            const query: any = {}
+            
+            query[key] = value
             const clientRepository = dataSource.getDataSource().getRepository(Client)
-            return await clientRepository.findBy( { key: value } )    
+            return await clientRepository.findBy( query )    
         } catch (error) {
             console.log(error)
             return []

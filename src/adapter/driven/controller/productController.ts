@@ -13,15 +13,15 @@ class ProductController {
     async update(req: Request, res: Response) {
         const productRepository = new ProductRepository()
         const productUseCase = new ProductUseCases(productRepository)
-        await productUseCase.update(parseInt(req.params.id), req.body)
-        res.status(200).send('ok')
+        const result = await productUseCase.update(parseInt(req.params.id), req.body)
+        result ? res.status(200).send('ok') : res.status(404).send('not found')
     }
 
     async delete(req: Request, res: Response) {
         const productRepository = new ProductRepository()
         const productUseCase = new ProductUseCases(productRepository)
-        await productUseCase.delete(parseInt(req.params.id))
-        res.status(200).send('ok')
+        const result = await productUseCase.delete(parseInt(req.params.id))
+        result ? res.status(200).send('ok') : res.status(404).send('not found')
     }
 
     async findByCategory(req: Request, res: Response) {

@@ -13,8 +13,8 @@ class ClientUseCases implements iClientUseCases {
     }
 
     async identify(clientInfo: any): Promise<boolean> {
-        const result = this.clientRepository.findBy('cpf', clientInfo.cpf)
-        return !!result
+        const result = await this.clientRepository.findBy('cpf', clientInfo.cpf)
+        return result.length > 0
     }
 }
 

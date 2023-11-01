@@ -33,7 +33,7 @@ class Server implements iDrivenAdapter{
         this.app.delete('/product/:id', productController.delete)
         this.app.get('/product/findByCategory/:category', productController.findByCategory)
         this.app.get('/orders/', orderController.find)
-        this.app.post('/orders/checkout/:id', orderController.checkout)
+        this.app.post('/order/checkout/:id', orderController.checkout)
     }
 
     async start(): Promise<void> {

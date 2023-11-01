@@ -15,7 +15,7 @@ class OrderRepository implements IOrderRepository{
 
     async findById(id: number): Promise<Order> {
         const orderRepository = dataSource.getDataSource().getRepository(Order)
-        return await orderRepository.findBy({ id: id }) 
+        return await orderRepository.findOneBy({ id: id }) 
     }
 
     async update(order: any): Promise<boolean> {
