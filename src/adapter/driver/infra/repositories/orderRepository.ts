@@ -6,6 +6,13 @@ class OrderRepository implements IOrderRepository{
     async find(): Promise<Order[] | []> {
         try {
             const orderRepository = dataSource.getDataSource().getRepository(Order)
+            orderRepository.createQueryBuilder("order")
+                .where("order.status <> :status", { status: Order.ORDER_STATUS_DONE})
+                .orderBy({
+                    "order.status": "DESC",
+                    "order.date": "ASC",
+                })
+
             return await orderRepository.find()    
         } catch (error) {
             console.log(error)

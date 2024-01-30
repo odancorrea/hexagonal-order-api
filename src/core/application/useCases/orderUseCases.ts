@@ -13,8 +13,18 @@ class OrderUseCases implements iOrderUseCases {
     async checkout(id: number): Promise<boolean> {
         let order = await this.orderRepository.findById(id)
         if (order) {
-            order.status = 'checkout'
+            order.status = Order.ORDER_STATUS_RECEIVED
             await this.orderRepository.update(order)
+            return true
+        }
+
+        return false
+    }
+
+    async setStatus(id: number, orderInfo: any): Promise<boolean> {
+        let order = await this.orderRepository.findById(id)
+        if (order) {
+            await this.orderRepository.update(Object.assign(order, orderInfo))
             return true
         }
 

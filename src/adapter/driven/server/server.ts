@@ -5,6 +5,7 @@ import application from "../controller/applicationController";
 import clientController from "../controller/clientController";
 import productController from "../controller/productController";
 import orderController from "../controller/orderController";
+import paymentController from "../controller/paymentController";
 
 class Server implements iDrivenAdapter{
     app: Express
@@ -34,6 +35,9 @@ class Server implements iDrivenAdapter{
         this.app.get('/product/findByCategory/:category', productController.findByCategory)
         this.app.get('/orders/', orderController.find)
         this.app.post('/order/checkout/:id', orderController.checkout)
+        this.app.put('/order/:id', orderController.setStatus)
+        this.app.get('payment/getStatus/:id', paymentController.getStatus)
+        this.app.put('/payment/:id', paymentController.setStatus)
     }
 
     async start(): Promise<void> {

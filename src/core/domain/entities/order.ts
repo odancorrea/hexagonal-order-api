@@ -4,6 +4,9 @@ import { Product } from "./product"
 
 @Entity()
 export class Order {
+    static ORDER_STATUS_RECEIVED: number = 1
+    static ORDER_STATUS_PREPARING: number = 2
+    static ORDER_STATUS_DONE: number = 3
     @PrimaryGeneratedColumn()
     id?: number
 
@@ -11,7 +14,7 @@ export class Order {
     date: Date
 
     @Column()
-    status: string
+    status: number
 
     @ManyToOne(() => Client, (client) => client.orders)
     client: Client
@@ -20,7 +23,7 @@ export class Order {
     @JoinTable()
     products: Product[]
 
-    constructor (date: Date, status: string, client: Client, products: Product[]) {
+    constructor (date: Date, status: number, client: Client, products: Product[]) {
         this.date = date
         this.status = status
         this.client = client
