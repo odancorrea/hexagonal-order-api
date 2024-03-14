@@ -1,14 +1,14 @@
 {
-    "family": "lanchonete-api",
+    "family": "lanchonete_api_task",
     "containerDefinitions": [
         {
-            "name": "lanchonete-api",
+            "name": "lanchonete_api",
             "image": "015024643338.dkr.ecr.sa-east-1.amazonaws.com/lanchonete-api:latest",
-            "cpu": 256,
+            "cpu": 512,
             "memory": 1024,
             "portMappings": [
                 {
-                    "name": "lanchonete-api-80-tcp",
+                    "name": "lanchonete_api-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
@@ -25,7 +25,7 @@
                 "logDriver": "awslogs",
                 "options": {
                     "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/lanchonete-api",
+                    "awslogs-group": "/ecs/lanchonete_api_task",
                     "awslogs-region": "sa-east-1",
                     "awslogs-stream-prefix": "ecs"
                 },
@@ -39,10 +39,10 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "256",
+    "cpu": "512",
     "memory": "1024",
     "runtimePlatform": {
-        "cpuArchitecture": "ARM64",
+        "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     }
 }
