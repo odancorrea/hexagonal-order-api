@@ -10,10 +10,10 @@ class PgDataSource implements iDrivenAdapter {
     constructor() {
         this.appDataSource = new DataSource({
             type: "postgres",
-            host: "db",
+            host: process.env.DATABASE_URI,
             port: 5432,
-            username: "root",
-            password: "strong-password",
+            username: process.env.DATABASE_USERNAME,
+            password: process.env.DATABASE_PASSWORD,
             database: "lanchonete",
             synchronize: true,
             logging: true,
