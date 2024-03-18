@@ -41,8 +41,8 @@ class Server implements iDrivenAdapter{
     }
 
     async start(): Promise<void> {
-        this.app.listen(this.port, () => { console.log('Server running') })
+        this.app.listen(this.port, () => { console.log(`Server running at port ${process.env.PORT}`) })
     }
 }
 
-export default new Server(process.env.PORT || '8000')
+export default new Server(process.env.PORT || '80')
