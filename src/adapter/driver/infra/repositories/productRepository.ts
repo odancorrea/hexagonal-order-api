@@ -4,15 +4,15 @@ import dataSource from "../dataSource";
 
 class ProductRepository implements IProductRepository{
     async create(product: any): Promise<boolean> {
-        // const productRepository = dataSource.getDataSource().getRepository(Product)
-        // await productRepository.save(product)
+        const productRepository = dataSource.getDataSource().getRepository(Product)
+        await productRepository.save(product)
         return true
     }
 
     async update(product: any): Promise<boolean> {
         try {
-            // const productRepository = dataSource.getDataSource().getRepository(Product)
-            // await productRepository.save(product)
+            const productRepository = dataSource.getDataSource().getRepository(Product)
+            await productRepository.save(product)
             return true
         } catch (error) {
             console.log(error)
@@ -22,8 +22,8 @@ class ProductRepository implements IProductRepository{
 
     async delete(product: any): Promise<boolean> {
         try {
-            // const productRepository = dataSource.getDataSource().getRepository(Product)
-            // await productRepository.delete(product)
+            const productRepository = dataSource.getDataSource().getRepository(Product)
+            await productRepository.delete(product)
             return true
         } catch (error) {
             console.log(error)
@@ -33,8 +33,8 @@ class ProductRepository implements IProductRepository{
 
     async find(id: number): Promise<Product | false> {
         try {
-            // const productRepository = dataSource.getDataSource().getRepository(Product)
-            // return await productRepository.findOneBy( { id: id } )
+            const productRepository = dataSource.getDataSource().getRepository(Product)
+            return await productRepository.findOneBy( { id: id } )
             return false    
         } catch (error) {
             console.log(error)
@@ -46,9 +46,8 @@ class ProductRepository implements IProductRepository{
         const query: any = {}
         query[field] = value
         try {
-            // const productRepository = dataSource.getDataSource().getRepository(Product)
-            // return await productRepository.findBy(query)
-            return []
+            const productRepository = dataSource.getDataSource().getRepository(Product)
+            return await productRepository.findBy(query)
         } catch (error) {
             console.log(error)
             return []
