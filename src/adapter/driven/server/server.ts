@@ -45,4 +45,4 @@ class Server implements iDrivenAdapter{
     }
 }
 
-export default new Server(process.env.PORT || '80')
+export default new Server('80')
