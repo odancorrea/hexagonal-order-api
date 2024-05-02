@@ -15,7 +15,7 @@ export class Client {
     @Column()
     cpf: string
 
-    @OneToMany(() => Order, (order: { client: any }) => order.client)
+    @OneToMany(() => Order, (order: { client: any }) => order.client, { cascade: true })
     orders?: Order[]
 
     constructor (name: string, email: string, cpf: string) {

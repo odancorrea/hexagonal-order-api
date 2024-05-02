@@ -6,13 +6,27 @@ services:
     build:
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8001:8001"
     networks:
       - mynetwork
     depends_on:
       - db
     environment:
-      - PORT=8000
+      - PORT=8001
+  orders:
+    container_name: lanchonete-orders
+    restart: always
+    build:
+      context: ./../lanchonete-orders/techchallenge-orders
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - mynetwork
+    # depends_on:
+    #   - nosqldb
+    environment:
+      - PORT=8002
   db:
     image: postgres
     container_name: postgres
@@ -26,6 +40,15 @@ services:
       POSTGRES_PASSWORD: strong-password
     volumes:
       - local_pgdata:/var/lib/postgresql/data
+  nosqldb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mynetwork
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4
@@ -37,10 +60,20 @@ services:
       PGADMIN_DEFAULT_PASSWORD: strong-password
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+  queue:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - mynetwork
 
 volumes:
   local_pgdata:
   pgadmin-data:
+  mongodb_data:
 
 networks:
   mynetwork:

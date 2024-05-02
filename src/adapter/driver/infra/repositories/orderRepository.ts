@@ -46,6 +46,16 @@ class OrderRepository implements IOrderRepository{
             return false
         }
     }
+
+    async create(order: any): Promise<Order | boolean> {
+        try {
+            const orderRepository = dataSource.getDataSource().getRepository(Order)
+            return await orderRepository.save(order)
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
 }
 
 export default OrderRepository

@@ -29,11 +29,14 @@ class Server implements iDrivenAdapter{
         this.app.get('/ping', application.ping)
         this.app.post('/client', clientController.create)
         this.app.post('/client/identify', clientController.identify)
+        this.app.get('/clients', clientController.find)
         this.app.post('/product/', productController.create)
         this.app.put('/product/:id', productController.update)
         this.app.delete('/product/:id', productController.delete)
         this.app.get('/product/findByCategory/:category', productController.findByCategory)
-        this.app.get('/orders/', orderController.find)
+        this.app.get('/products', productController.find)
+        this.app.get('/orders', orderController.find)
+        this.app.post('/order', orderController.post)
         this.app.post('/order/checkout/:id', orderController.checkout)
         this.app.put('/order/:id', orderController.setStatus)
         this.app.get('payment/getStatus/:id', paymentController.getStatus)
@@ -45,4 +48,4 @@ class Server implements iDrivenAdapter{
     }
 }
 
-export default new Server('80')
+export default new Server(process.env.PORT || '8001')

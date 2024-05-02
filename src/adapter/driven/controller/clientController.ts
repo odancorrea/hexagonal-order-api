@@ -16,6 +16,13 @@ class ClientController {
         const result = await clientUseCase.identify(req.body)
         result ? res.status(200).send('ok') : res.status(404).send('not found')
     }
+
+    async find(req: Request, res: Response) {
+        const clientRepository = new ClientRepository()
+        const clientUseCase = new ClientUseCases(clientRepository)
+        const result = await clientUseCase.find()
+        result ? res.status(200).send(result) : res.status(404).send('not found')
+    }
 }
 
 export default new ClientController()

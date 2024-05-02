@@ -16,6 +16,10 @@ class ClientUseCases implements iClientUseCases {
         const result = await this.clientRepository.findBy('cpf', clientInfo.cpf)
         return result.length > 0
     }
+
+    async find(): Promise<any> {
+        return await this.clientRepository.find()
+    }
 }
 
 export default ClientUseCases

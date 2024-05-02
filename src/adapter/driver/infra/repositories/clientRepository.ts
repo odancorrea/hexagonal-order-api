@@ -19,9 +19,18 @@ class ClientRepository implements IClientRepository{
             const query: any = {}
             
             query[key] = value
-            const client = new Client('Joao', 'joao@joao.com', '123456789')
             const clientRepository = dataSource.getDataSource().getRepository(Client)
             return await clientRepository.findBy( query )    
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
+
+    async find(): Promise<Client[] | []> {
+        try {
+            const clientRepository = dataSource.getDataSource().getRepository(Client)
+            return await clientRepository.find()    
         } catch (error) {
             console.log(error)
             return []
