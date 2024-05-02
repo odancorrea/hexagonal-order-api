@@ -19,7 +19,7 @@ export class Order {
     @ManyToOne(() => Client, (client) => client.orders)
     client: Client
 
-    @ManyToMany(() => Product, (product: { orders: any }) => product.orders)
+    @ManyToMany(() => Product, (product: { orders: any }) => product.orders, { cascade: true })
     @JoinTable()
     products: Product[]
 

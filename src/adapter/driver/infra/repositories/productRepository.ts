@@ -1,3 +1,4 @@
+import { In } from "typeorm";
 import { Product } from "../../../../core/domain/entities/product";
 import IProductRepository from "../../../../core/domain/repositories/iProductRepository";
 import dataSource from "../dataSource";
@@ -58,6 +59,16 @@ class ProductRepository implements IProductRepository{
         try {
             const productRepository = dataSource.getDataSource().getRepository(Product)
             return await productRepository.find()
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
+
+    async findByIds(ids: number[]): Promise<Product[] | []> {
+        try {
+            const productRepository = dataSource.getDataSource().getRepository(Product)
+            return await productRepository.find( { where: { id: In(ids) }} )
         } catch (error) {
             console.log(error)
             return []

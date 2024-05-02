@@ -6,5 +6,6 @@ export default interface IProductRepository {
     delete(product: any): Promise<boolean>,
     find(id: number): Promise<Product | false>,
     findBy(key: string, value: string): Promise<Product[] | []>,
-    findAll(): Promise<Product[] | []>
+    findAll(): Promise<Product[] | []>,
+    findByIds(ids: number[]): Promise<Product[] | []>
 }
