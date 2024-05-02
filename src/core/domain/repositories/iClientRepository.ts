@@ -2,5 +2,6 @@ import { Client } from "../entities/client";
 
 export default interface IClientRepository {
     create(client: any): Promise<boolean>,
-    findBy(key: string, value: string): Promise<Client[] | []>
+    findBy(key: string, value: string): Promise<Client[] | []>,
+    find(): Promise<Client[] | []>
 }

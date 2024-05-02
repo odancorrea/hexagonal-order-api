@@ -36,6 +36,10 @@ class ProductUseCases implements iProductUseCases {
         let products = await this.productRepository.findBy('category', category)
         return products
     }
+
+    async find(): Promise<Product[] | []> {
+        return await this.productRepository.findAll()
+    }
 }
 
 export default ProductUseCases

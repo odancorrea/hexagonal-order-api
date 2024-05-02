@@ -53,6 +53,16 @@ class ProductRepository implements IProductRepository{
             return []
         }
     }
+
+    async findAll(): Promise<Product[] | []> {
+        try {
+            const productRepository = dataSource.getDataSource().getRepository(Product)
+            return await productRepository.find()
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
 }
 
 export default ProductRepository
