@@ -39,8 +39,11 @@ class Server implements iDrivenAdapter{
         this.app.post('/order', orderController.post)
         this.app.post('/order/checkout/:id', orderController.checkout)
         this.app.put('/order/:id', orderController.setStatus)
+        this.app.post('/payment', paymentController.create)
+        this.app.get('/payment', paymentController.find)
         this.app.get('payment/getStatus/:id', paymentController.getStatus)
         this.app.put('/payment/:id', paymentController.setStatus)
+        this.app.post('/payment/:id', paymentController.pay)
     }
 
     async start(): Promise<void> {

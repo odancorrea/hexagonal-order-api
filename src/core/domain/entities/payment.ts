@@ -12,7 +12,7 @@ export class Payment {
     @Column()
     status: string
 
-    @OneToOne(() => Order)
+    @OneToOne(() => Order, { cascade: true })
     @JoinColumn()
     order: Order
 

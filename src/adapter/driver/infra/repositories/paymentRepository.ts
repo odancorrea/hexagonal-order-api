@@ -18,6 +18,25 @@ class PaymentRepository implements IPaymentRepository{
             return false
         }
     }
+
+    async create(payment: any): Promise<Payment | undefined> {
+        try {
+            const paymentRepository = dataSource.getDataSource().getRepository(Payment)
+            return await paymentRepository.save(payment)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async find(): Promise<Payment[] | []> {
+        try {
+            const paymentRepository = dataSource.getDataSource().getRepository(Payment)
+            return await paymentRepository.find()
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
 }
 
 export default PaymentRepository

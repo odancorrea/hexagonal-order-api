@@ -1,8 +1,10 @@
 import iPaymentUseCases from "./iPaymentUseCases";
 import IPaymentRepository from "../../domain/repositories/iPaymentRepository";
+import { Payment } from "../../domain/entities/payment";
+import IOrderRepository from "../../domain/repositories/iOrderRepository";
 
 class PaymentUseCases implements iPaymentUseCases {
-    constructor (private paymentRepository: IPaymentRepository) {}
+    constructor (private paymentRepository: IPaymentRepository, private orderRepository: IOrderRepository) {}
     
     async getStatus(id: number): Promise<String | boolean> {
         let payment = await this.paymentRepository.findById(id)
@@ -21,6 +23,29 @@ class PaymentUseCases implements iPaymentUseCases {
         }
 
         return false
+    }
+
+    async pay(id: number): Promise<boolean> {
+        let payment = await this.paymentRepository.findById(id)
+        if (payment) {
+            // chamar api
+            payment.status = 'paid'
+            await this.paymentRepository.update(payment)
+            return true
+        } else {
+            return false
+        }
+    }
+
+    async create(paymentInfo: any): Promise<Payment | undefined> {
+        paymentInfo.order = await this.orderRepository.findById(paymentInfo.order)
+        paymentInfo.date = new Date()
+        console.log(paymentInfo)
+        return await this.paymentRepository.create(paymentInfo)
+    }
+
+    async find(): Promise<Payment[] | []> {
+        return await this.paymentRepository.find()
     }
 }
 

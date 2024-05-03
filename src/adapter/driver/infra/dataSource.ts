@@ -1,5 +1,6 @@
 import { Client } from "../../../core/domain/entities/client"
 import { Order } from "../../../core/domain/entities/order"
+import { Payment } from "../../../core/domain/entities/payment"
 import { Product } from "../../../core/domain/entities/product"
 import iDrivenAdapter from "../../driven/iDrivenAdapter"
 import { DataSource } from "typeorm"
@@ -17,7 +18,7 @@ class PgDataSource implements iDrivenAdapter {
             database: "lanchonete",
             synchronize: true,
             logging: true,
-            entities: [Client, Product, Order],
+            entities: [Client, Product, Order, Payment],
             subscribers: [],
             migrations: [],
         })
