@@ -27,6 +27,18 @@ services:
     #   - nosqldb
     environment:
       - PORT=8002
+  payment:
+    container_name: lanchonete-payments
+    restart: always
+    build:
+      context: ./../techchallenge-payment
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      - mynetwork
+    environment:
+      - PORT=8003
   db:
     image: postgres
     container_name: postgres
