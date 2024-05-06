@@ -2,9 +2,14 @@ import iPaymentUseCases from "./iPaymentUseCases";
 import IPaymentRepository from "../../domain/repositories/iPaymentRepository";
 import { Payment } from "../../domain/entities/payment";
 import IOrderRepository from "../../domain/repositories/iOrderRepository";
+import IHttp from "../../domain/repositories/iHttp";
 
 class PaymentUseCases implements iPaymentUseCases {
-    constructor (private paymentRepository: IPaymentRepository, private orderRepository: IOrderRepository) {}
+    constructor (
+        private paymentRepository: IPaymentRepository,
+        private orderRepository: IOrderRepository,
+        private http: IHttp
+    ) {}
     
     async getStatus(id: number): Promise<String | boolean> {
         let payment = await this.paymentRepository.findById(id)
@@ -28,9 +33,12 @@ class PaymentUseCases implements iPaymentUseCases {
     async pay(id: number): Promise<boolean> {
         let payment = await this.paymentRepository.findById(id)
         if (payment) {
-            // chamar api
-            payment.status = 'paid'
-            await this.paymentRepository.update(payment)
+            const paymentBody = { order: payment.order }
+            const result = await this.http.post(process.env.PAYMENT_URL || 'localhost:8003', paymentBody)
+            if (result == 'ok') {
+                payment.status = 'paid'
+                await this.paymentRepository.update(payment)   
+            }
             return true
         } else {
             return false
