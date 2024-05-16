@@ -29,6 +29,8 @@ name: Deploy to Amazon ECS
 on:
   push:
     branches: [ "master" ]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 env:
   AWS_REGION: "sa-east-1"                   # set this to your preferred AWS region, e.g. us-west-1
@@ -44,6 +46,18 @@ permissions:
   contents: read
 
 jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
