@@ -20,18 +20,10 @@ class OrderUseCases implements iOrderUseCases {
 
     async checkout(id: number): Promise<boolean> {
         let order = await this.orderRepository.findById(id)
-        console.log(order)
         if (order) {
-            const order2 = {
-                idOrder:1,
-                date: "2024-05-02T09:00:00.000",
-                status: 1,
-                client: 1,
-                products: [4]
-            }
-            this.orderQueue.sendToQueue(JSON.stringify(order2), process.env.QUEUE_NAME || 'orders_queue')
-            // order.status = Order.ORDER_STATUS_RECEIVED
-            // await this.orderRepository.update(order)
+            this.orderQueue.sendToQueue(JSON.stringify(order), process.env.QUEUE_NAME || 'orders_queue')
+            order.status = Order.ORDER_STATUS_RECEIVED
+            await this.orderRepository.update(order)
             return true
         }
 
@@ -53,7 +45,6 @@ class OrderUseCases implements iOrderUseCases {
         const products = await this.productRepository.findByIds(orderInfo.products)
         orderInfo.client = client
         orderInfo.products = products
-        console.log(orderInfo)
         return await this.orderRepository.create(orderInfo)
     }
 }
