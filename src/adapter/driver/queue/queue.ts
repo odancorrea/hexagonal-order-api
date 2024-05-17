@@ -16,7 +16,6 @@ class Queue implements IOrderQueue {
     }
 
     async sendToQueue (message: string, queue: string) {
-        console.log(queue)
         this.channel?.sendToQueue(queue, Buffer.from(message))
     }
 }

@@ -48,7 +48,6 @@ class PaymentUseCases implements iPaymentUseCases {
     async create(paymentInfo: any): Promise<Payment | undefined> {
         paymentInfo.order = await this.orderRepository.findById(paymentInfo.order)
         paymentInfo.date = new Date()
-        console.log(paymentInfo)
         return await this.paymentRepository.create(paymentInfo)
     }
 

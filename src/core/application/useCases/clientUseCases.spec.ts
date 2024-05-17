@@ -7,6 +7,7 @@ describe('ClientUseCases', () => {
     })
 
     it('deve criar um cliente', async () => {
+        // Dado que temos um payload para insercao do cliente no banco de dados, quando a chamada para criacao ser executada, entao deve-se ter sucesso na criacao
         //arrange
         const payload = {
             name: 'teste',
@@ -26,6 +27,7 @@ describe('ClientUseCases', () => {
         const clientUseCase = new ClientUseCases(clientRepository)
 
         //act
+        // 
         const client = await clientUseCase.create(payload)
 
         //assert
@@ -33,6 +35,7 @@ describe('ClientUseCases', () => {
     })
 
     it('deve identificar um cliente', async () => {
+        // Dado que e informado um cpf para identificacao, quando a chamada para a identificacao ser executada, entao deve-se ter sucesso na identificacao
         //arrange
         const payload = {
             cpf: '123456789'
@@ -57,6 +60,7 @@ describe('ClientUseCases', () => {
     })
 
     it('deve buscar os clientes', async () => {
+        // Dado que chamamos a rota de busca de clientes na api, quando a chamada para a busca ser executada, entao deve-se retornar um array com 1 cliente
         //arrange
         const mock = [{
             id:1,
