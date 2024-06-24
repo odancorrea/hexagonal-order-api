@@ -214,7 +214,7 @@ class OrderUseCases implements iOrderUseCases {
                 client: 1,
                 products: [4]
             }
-            this.orderQueue.sendToQueue(JSON.stringify(order2), process.env.QUEUE_NAME || 'orders_queue')
+            this.orderQueue.sendToQueue(JSON.stringify(order2), process.env.PENDING_PAYMENT || 'pagamento_pendente')
             // order.status = Order.ORDER_STATUS_RECEIVED
             // await this.orderRepository.update(order)
             return true
