@@ -21,8 +21,8 @@ class OrderUseCases implements iOrderUseCases {
     async checkout(id: number): Promise<boolean> {
         let order = await this.orderRepository.findById(id)
         if (order) {
-            this.orderQueue.sendToQueue(JSON.stringify(order), process.env.QUEUE_NAME || 'orders_queue')
-            order.status = Order.ORDER_STATUS_RECEIVED
+            this.orderQueue.sendToQueue(JSON.stringify(order), process.env.PENDING_PAYMENT || 'pagamento_pendente')
+            order.status = Order.ORDER_STATUS_START
             await this.orderRepository.update(order)
             return true
         }
