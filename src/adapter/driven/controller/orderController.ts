@@ -49,16 +49,17 @@ class OrderController {
         const clientRepository = new ClientRepository()
         const productRepository = new ProductRepository()
         const orderUseCase = new OrderUseCases(orderRepository, queue, clientRepository, productRepository)
-        await orderUseCase.setStatus(parseInt(parsedQueueObject.order), { status: Order.ORDER_STATUS_CANCELED })
+        await orderUseCase.setStatus(parseInt(parsedQueueObject.id), { status: Order.ORDER_STATUS_CANCELED })
     }
 
     async confirm(queueObject: any) {
         const parsedQueueObject = JSON.parse(queueObject.content.toString())
+        console.log(parsedQueueObject)
         const orderRepository = new OrderRepository()
         const clientRepository = new ClientRepository()
         const productRepository = new ProductRepository()
         const orderUseCase = new OrderUseCases(orderRepository, queue, clientRepository, productRepository)
-        await orderUseCase.setStatus(parseInt(parsedQueueObject.order), { status: Order.ORDER_STATUS_CONFIRMED })
+        await orderUseCase.setStatus(parseInt(parsedQueueObject.id), { status: Order.ORDER_STATUS_CONFIRMED })
     }
 }
 
