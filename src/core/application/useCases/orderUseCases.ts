@@ -21,8 +21,8 @@ class OrderUseCases implements iOrderUseCases {
     async checkout(id: number): Promise<boolean> {
         let order = await this.orderRepository.findById(id)
         if (order) {
-            this.orderQueue.sendToQueue(JSON.stringify(order), process.env.QUEUE_NAME || 'orders_queue')
-            order.status = Order.ORDER_STATUS_RECEIVED
+            this.orderQueue.sendToQueue(JSON.stringify(order), process.env.PENDING_PAYMENT || 'pagamento_pendente')
+            order.status = Order.ORDER_STATUS_START
             await this.orderRepository.update(order)
             return true
         }
@@ -43,7 +43,7 @@ class OrderUseCases implements iOrderUseCases {
     async create(orderInfo: any): Promise<Order | boolean> {
         const client = await this.clientRepository.findBy('id', orderInfo.id)
         const products = await this.productRepository.findByIds(orderInfo.products)
-        orderInfo.client = client
+        orderInfo.client = client[0]
         orderInfo.products = products
         return await this.orderRepository.create(orderInfo)
     }

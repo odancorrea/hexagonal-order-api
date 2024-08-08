@@ -36,6 +36,17 @@ class ClientRepository implements IClientRepository{
             return []
         }
     }
+
+    async delete(client: any): Promise<boolean> {
+        try {
+            const clientRepository = dataSource.getDataSource().getRepository(Client)
+            await clientRepository.delete(client)
+            return true
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
 }
 
 export default ClientRepository

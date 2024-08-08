@@ -23,6 +23,13 @@ class ClientController {
         const result = await clientUseCase.find()
         result ? res.status(200).send(result) : res.status(404).send('not found')
     }
+
+    async delete(req: Request, res: Response) {
+        const clientRepository = new ClientRepository()
+        const clientUseCase = new ClientUseCases(clientRepository)
+        const result = await clientUseCase.delete(req.params.cpf)
+        result ? res.status(200).send('ok') : res.status(404).send('not found')
+    }
 }
 
 export default new ClientController()

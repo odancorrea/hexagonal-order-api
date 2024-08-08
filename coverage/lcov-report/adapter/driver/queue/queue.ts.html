@@ -121,7 +121,7 @@ class Queue implements IOrderQueue {
 <span class="cstat-no" title="statement not covered" >            connection.createChannel((error1, channel) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                if (error1) throw error1</span>
 <span class="cstat-no" title="statement not covered" >                this.channel = channel</span>
-<span class="cstat-no" title="statement not covered" >                channel.assertQueue(process.env.QUEUE_NAME || 'orders_queue', { durable: false })</span>
+<span class="cstat-no" title="statement not covered" >                channel.assertQueue(process.env.QUEUE_NAME || 'pagamento_pendente', { durable: false })</span>
 <span class="cstat-no" title="statement not covered" >            })</span>
 <span class="cstat-no" title="statement not covered" >        })</span>
 <span class="cstat-no" title="statement not covered" >    }</span>

@@ -1,5 +1,3 @@
-# Welcome to StackEdit!
-
 
 # hexagonal-order-api
 
@@ -11,6 +9,7 @@ Para subir a aplicacao em ambiente de desenvolvimento:
 - Utilize o Docker Compose para subir o ambiente completo
 - - Rode `docker compose build`
 - - Rode `docker compose up`
+- - Certifique que possui um schema no seu banco de dados chamado lanchonete
 
 
 Em ambientes produtivos, temos uma pasta *terraform* com a estrutura criada para deploy em Cloud. nesta pasta estão separados os scripts para deploy baseado na stack a seguir:
@@ -19,4 +18,11 @@ Em ambientes produtivos, temos uma pasta *terraform* com a estrutura criada para
 - ECR e ECS
 - API Gateway com autenticação com Cognito
 
-O video de explicação e integração funcionando esta a seguir: https://youtu.be/olK175MmdOU
+A arquitetura do projeto está definida no desenho a seguir, inclusive com o padrão SAGA Coreografado:
+![Padrão Saga](images/saga_techchallenge.jpg)
+
+Esta aplicação não passou por nenhum problema de segurança segundo o relatório do Owasp Zap a seguir:
+[Relatório Owasp Zap](docs/2024-08-06-ZAP-Report-.html)
+
+Esta solução também possui um documento RIPD com todas as informações legais sobre a LGPD:
+[Relatório RIPD](docs/RIPD.docx)

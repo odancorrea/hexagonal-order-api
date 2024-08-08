@@ -4,9 +4,12 @@ import { Product } from "./product"
 
 @Entity()
 export class Order {
-    static ORDER_STATUS_RECEIVED: number = 1
-    static ORDER_STATUS_PREPARING: number = 2
+    static ORDER_STATUS_START: number = 0
+    static ORDER_STATUS_PAID: number = 1
+    static ORDER_STATUS_CONFIRMED: number = 2
     static ORDER_STATUS_DONE: number = 3
+    static ORDER_STATUS_CANCELED: number = 4
+
     @PrimaryGeneratedColumn()
     id?: number
 

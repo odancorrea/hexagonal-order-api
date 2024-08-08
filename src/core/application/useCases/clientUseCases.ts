@@ -20,6 +20,17 @@ class ClientUseCases implements iClientUseCases {
     async find(): Promise<any> {
         return await this.clientRepository.find()
     }
+
+    async delete(cpf: string): Promise<boolean> {
+        let result = await this.clientRepository.findBy('cpf', cpf)
+        if (result.length > 0) {
+            const client = result[0]
+            await this.clientRepository.delete(client)
+            return true
+        }
+
+        return false
+    }
 }
 
 export default ClientUseCases

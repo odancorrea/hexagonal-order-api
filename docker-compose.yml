@@ -10,6 +10,7 @@ services:
     networks:
       - mynetwork
     depends_on:
+      - queue
       - db
     environment:
       - PORT=8001
@@ -17,14 +18,15 @@ services:
     container_name: lanchonete-orders
     restart: always
     build:
-      context: ./../lanchonete-orders/techchallenge-orders
+      context: ./../techchallenge-orders
       dockerfile: Dockerfile
     ports:
       - "8002:8002"
     networks:
       - mynetwork
-    # depends_on:
-    #   - nosqldb
+    depends_on:
+      - queue
+      - nosqldb
     environment:
       - PORT=8002
   payment:
@@ -37,6 +39,8 @@ services:
       - "8003:8003"
     networks:
       - mynetwork
+    depends_on:
+      - queue
     environment:
       - PORT=8003
   db:
@@ -70,6 +74,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: strong-password
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
     volumes:
       - pgadmin-data:/var/lib/pgadmin
   queue:

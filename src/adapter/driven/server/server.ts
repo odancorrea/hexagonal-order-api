@@ -30,6 +30,7 @@ class Server implements iDrivenAdapter{
         this.app.post('/client', clientController.create)
         this.app.post('/client/identify', clientController.identify)
         this.app.get('/clients', clientController.find)
+        this.app.delete('/clients/:cpf', clientController.delete)
         this.app.post('/product/', productController.create)
         this.app.put('/product/:id', productController.update)
         this.app.delete('/product/:id', productController.delete)
