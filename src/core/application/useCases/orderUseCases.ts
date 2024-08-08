@@ -43,7 +43,7 @@ class OrderUseCases implements iOrderUseCases {
     async create(orderInfo: any): Promise<Order | boolean> {
         const client = await this.clientRepository.findBy('id', orderInfo.id)
         const products = await this.productRepository.findByIds(orderInfo.products)
-        orderInfo.client = client
+        orderInfo.client = client[0]
         orderInfo.products = products
         return await this.orderRepository.create(orderInfo)
     }

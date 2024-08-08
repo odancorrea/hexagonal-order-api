@@ -10,6 +10,7 @@ services:
     networks:
       - mynetwork
     depends_on:
+      - queue
       - db
     environment:
       - PORT=8001
@@ -23,8 +24,9 @@ services:
       - "8002:8002"
     networks:
       - mynetwork
-    # depends_on:
-    #   - nosqldb
+    depends_on:
+      - queue
+      - nosqldb
     environment:
       - PORT=8002
   payment:
@@ -37,6 +39,8 @@ services:
       - "8003:8003"
     networks:
       - mynetwork
+    depends_on:
+      - queue
     environment:
       - PORT=8003
   db:
@@ -52,15 +56,15 @@ services:
       POSTGRES_PASSWORD: strong-password
     volumes:
       - local_pgdata:/var/lib/postgresql/data
-  # nosqldb:
-  #   image: mongo:latest
-  #   container_name: mongodb
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongodb_data:/data/db
-  #   networks:
-  #     - mynetwork
+  nosqldb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mynetwork
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4

@@ -20,7 +20,7 @@ Em ambientes produtivos, temos uma pasta *terraform* com a estrutura criada para
 - ECR e ECS
 - API Gateway com autenticação com Cognito
 
-A arquitetura do projeto está definida no desenho a seguir, inclusive com o padrão SAGA Orquestrado:
+A arquitetura do projeto está definida no desenho a seguir, inclusive com o padrão SAGA Coreografado:
 ![Padrão Saga](images/saga_techchallenge.jpg)
 
 Esta aplicação não passou por nenhum problema de segurança segundo o relatório do Owasp Zap a seguir:
