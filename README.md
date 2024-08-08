@@ -26,3 +26,8 @@ Esta aplicação não passou por nenhum problema de segurança segundo o relató
 
 Esta solução também possui um documento RIPD com todas as informações legais sobre a LGPD:
 [Relatório RIPD](docs/RIPD.docx)
+
+Os videos das explicações estão a seguir:
+Explicação geral: https://youtu.be/E6O3faUEQSE
+SAGA funcionando pedido confirmado: https://youtu.be/tVJvLc5ocMw
+SAGA funcionando pedido rejeitado: https://youtu.be/yMIvElu2m8g
